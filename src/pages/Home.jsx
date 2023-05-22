@@ -5,6 +5,7 @@ import Header from '../layout/Header';
 import VerticalNav from '../components/VerticalNav';
 import Analytics from '../components/Analytics';
 import Hero from '../components/Hero';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Home = () => {
     const { userId } = useParams();
@@ -16,7 +17,7 @@ const Home = () => {
             <Header userId={userId} />
 
             {loading ? (
-                <section className="loading">Loading...</section>
+                <LoadingSpinner />
             ) : error ? (
                 <section className="error">Erreur : {error.message}</section>
             ) : (
