@@ -1,0 +1,106 @@
+main{
+    padding-top: 60px;
+}
+
+.hero {
+    margin-bottom: 70px;
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 40px;
+
+        span {
+            color: #FF0101;
+        }
+    }
+
+    p {
+        font-size: 18px;
+    }
+}
+
+.analytics {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 30px;
+
+    @media screen and (max-width: 1365px) {
+        flex-direction: column;
+    }
+    
+    
+    .stats {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        width: calc(100% - 330px);
+        @media screen and (max-width: 1365px) {
+            width: 100%;
+        }
+
+        &>div {
+
+        }
+        
+        .activity {
+            
+        
+        }
+    
+        .sessions {
+            
+            
+        }
+    
+        .performance {
+            
+            
+        }
+    
+        .score {
+            
+            
+        }
+    }
+
+    .nutrients {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 300px;
+
+        @media screen and (max-width: 1365px) {
+            flex-flow: row wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .nutrients-0 {
+        
+        
+        }
+    
+        .nutrients-1 {
+            
+            
+        }
+    
+        .nutrients-2 {
+            
+            
+        }
+    
+        .nutrients-3 {
+           
+            
+        }
+    }
+
+    
+    
+
+    
+}

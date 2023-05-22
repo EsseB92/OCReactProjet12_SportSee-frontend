@@ -1,0 +1,23 @@
+.sessions{
+    background-color: #FF0000;
+    position: relative;
+    border-radius: 5px;
+    width: fit-content;
+
+    h2{
+        position: absolute;
+        top: 30px;
+        left: 35px;
+        z-index: 1;
+        color: white;
+        opacity: 0.5;
+        font-size: 15px;
+        width: 140px;
+        line-height: 24px;
+    }
+
+    .custom-tooltip {
+        background-color: white;
+        padding: 10px 7px;
+    }
+}

@@ -1,0 +1,16 @@
+.horizontal-nav {
+    width: 100%;
+    & > ul {
+        display: flex;
+        justify-content: space-around;
+        font-size: 25px;
+        
+        & > li {
+
+            & > a{
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+    }
+}
