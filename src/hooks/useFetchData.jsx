@@ -38,7 +38,9 @@ const useFetchData = (userId) => {
                 setError(error);
             })
             .finally(() => {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             });
     }, [userId]);
 
