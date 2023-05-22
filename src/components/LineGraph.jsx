@@ -10,67 +10,64 @@ import {
 
 const day = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
+const createSessionData = (sessions) => {
+    return sessions.flatMap((session, index) => {
+        const sessionData = {
+            index: index + 1,
+            day: day[index],
+            duration: session.sessionLength,
+        };
+
+        const extraSession = {
+            index: index + (index === 0 ? 0 : 2),
+            day: '',
+            duration: session.sessionLength,
+        };
+
+        if (index === 0 || sessions.length - 1) {
+            return [sessionData, extraSession];
+        }
+
+        return sessionData;
+    });
+};
+
+const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length && payload[0].payload.day !== '') {
+        return (
+            <div className="custom-tooltip">
+                <p className="duration">{`${payload[0].value} min`}</p>
+            </div>
+        );
+    }
+    return null;
+};
+
+const CustomDot = ({ cx, cy, value }) => {
+    if (cx !== 0 && cx !== 260) {
+        return (
+            <svg
+                x={cx - 8}
+                y={cy - 8}
+                width={16}
+                height={16}
+                viewBox="0 0 100 100"
+            >
+                <circle cx={50} cy={50} r="25" fill="white" opacity={1} />
+                <circle cx={50} cy={50} r="50" fill="white" opacity={0.5} />
+            </svg>
+        );
+    }
+    return null;
+};
+
 const LineGraph = ({ title, sessions }) => {
     const [activeIndex, setActiveIndex] = useState(null);
 
-    const data = useMemo(() => {
-        return sessions.data.sessions.flatMap((session, index) => {
-            const sessionData = {
-                index: index + 1,
-                day: day[index],
-                duration: session.sessionLength,
-            };
-
-            if (index === 0) {
-                const firstSession = {
-                    index: index,
-                    day: '',
-                    duration: session.sessionLength,
-                };
-                return [firstSession, sessionData];
-            } else if (index === sessions.data.sessions.length - 1) {
-                const lastSession = {
-                    index: index + 2,
-                    day: '',
-                    duration: session.sessionLength,
-                };
-                return [sessionData, lastSession];
-            } else {
-                return sessionData;
-            }
-        });
-    }, [sessions]);
-
-    const CustomTooltip = ({ active, payload }) => {
-        if (active && payload && payload.length) {
-            if (payload[0].payload.day !== '') {
-                return (
-                    <div className="custom-tooltip">
-                        <p className="duration">{`${payload[0].value} min`}</p>
-                    </div>
-                );
-            }
-        }
-        return null;
-    };
-
-    const CustomDot = ({ cx, cy, value }) => {
-        if (cx !== 0 && cx !== 260) {
-            return (
-                <svg
-                    x={cx - 8}
-                    y={cy - 8}
-                    width={16}
-                    height={16}
-                    viewBox="0 0 100 100"
-                >
-                    <circle cx={50} cy={50} r="25" fill="white" opacity={1} />
-                    <circle cx={50} cy={50} r="50" fill="white" opacity={0.5} />
-                </svg>
-            );
-        }
-        return null;
-    };
+    const data = useMemo(
+        () => createSessionData(sessions.data.sessions),
+        [sessions]
+    );
 
     return (
         <article className="sessions">
@@ -97,18 +94,12 @@ const LineGraph = ({ title, sessions }) => {
                 <Tooltip
                     cursor={false}
                     content={({ active, payload }) => {
-                        if (active) {
-                            setActiveIndex(payload[0].payload.index);
-                            return (
-                                <CustomTooltip
-                                    active={active}
-                                    payload={payload}
-                                />
-                            );
-                        } else {
-                            setActiveIndex(null);
-                            return null;
-                        }
+                        setActiveIndex(
+                            active ? payload[0].payload.index : null
+                        );
+                        return (
+                            <CustomTooltip active={active} payload={payload} />
+                        );
                     }}
                 />
                 <Line
