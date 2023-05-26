@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useFetchData = (userId) => {
+const useFetchData = (userId, useMock = false) => {
     const [data, setData] = useState({
         user: null,
         activity: null,
@@ -10,16 +10,19 @@ const useFetchData = (userId) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const baseUrl = `http://localhost:3000/user/`;
+    const baseUrl = useMock
+        ? `${process.env.PUBLIC_URL}/_mock/user/`
+        : `http://localhost:3000/user/`;
+    const extensionUrl = useMock ? '.json' : '';
 
     useEffect(() => {
         setLoading(true);
 
         Promise.all([
-            fetch(`${baseUrl}${userId}`),
-            fetch(`${baseUrl}${userId}/activity`),
-            fetch(`${baseUrl}${userId}/average-sessions`),
-            fetch(`${baseUrl}${userId}/performance`),
+            fetch(`${baseUrl}${userId}${extensionUrl}`),
+            fetch(`${baseUrl}${userId}/activity${extensionUrl}`),
+            fetch(`${baseUrl}${userId}/average-sessions${extensionUrl}`),
+            fetch(`${baseUrl}${userId}/performance${extensionUrl}`),
         ])
             .then((responses) =>
                 Promise.all(
@@ -42,7 +45,7 @@ const useFetchData = (userId) => {
                     setLoading(false);
                 }, 1000);
             });
-    }, [userId]);
+    }, [baseUrl, extensionUrl, userId]);
 
     return { data, loading, error };
 };

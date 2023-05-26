@@ -9,29 +9,32 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Home = () => {
     const { userId } = useParams();
-    const { data, loading, error } = useFetchData(userId);
+    const { data, loading, error } = useFetchData(userId, false);
 
     return (
         <>
             <VerticalNav />
             <Header userId={userId} />
+            <main>
+                {loading ? (
+                    <LoadingSpinner />
+                ) : error ? (
+                    <section className="error">
+                        Erreur : {error.message}
+                    </section>
+                ) : (
+                    data.user &&
+                    data.activity &&
+                    data.averageSessions &&
+                    data.performance && (
+                        <>
+                            <Hero user={data.user} />
 
-            {loading ? (
-                <LoadingSpinner />
-            ) : error ? (
-                <section className="error">Erreur : {error.message}</section>
-            ) : (
-                data.user &&
-                data.activity &&
-                data.averageSessions &&
-                data.performance && (
-                    <main>
-                        <Hero user={data.user} />
-
-                        <Analytics data={data} />
-                    </main>
-                )
-            )}
+                            <Analytics data={data} />
+                        </>
+                    )
+                )}
+            </main>
         </>
     );
 };
