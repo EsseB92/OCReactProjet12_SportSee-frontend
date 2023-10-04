@@ -1,14 +1,20 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 const Connexion = () => {
-    return (
-        <>
-            <p>Se connecter en tant que</p>
-            <NavLink to={`/user/12/`}>Karl Dovineau</NavLink>
-            <br />
-            <NavLink to={`/user/18/`}>Cecilia Ratorez</NavLink>
-        </>
-    );
+  return (
+    <div className="connection">
+      <div className="container">
+        <h1>Se connecter en tant que</h1>
+        <NavLink className="link" to={`/user/12/`}>
+          Karl Dovineau
+        </NavLink>
+
+        <NavLink className="link" to={`/user/18/`}>
+          Cecilia Ratorez
+        </NavLink>
+      </div>
+    </div>
+  );
 };
 
 export default Connexion;

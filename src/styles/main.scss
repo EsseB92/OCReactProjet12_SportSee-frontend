@@ -1,19 +1,10 @@
-@import
-    './base/reset',
-    './base/base';
+@import "./base/reset", "./base/base";
 
-@import
-    './layout/header';
+@import "./layout/header";
 
-@import
-    './components/loading-spinner',
-    './components/activity',
-    './components/card',
-    './components/horizontal-nav',
-    './components/vertical-nav',
-    './components/bar-graph',
-    './components/pie-graph',
-    './components/line-graph';
+@import "./components/loading-spinner", "./components/activity",
+  "./components/card", "./components/horizontal-nav",
+  "./components/vertical-nav", "./components/bar-graph",
+  "./components/pie-graph", "./components/line-graph";
 
-@import
-    './pages/home';
+@import "./pages/home", "./pages/connexion";

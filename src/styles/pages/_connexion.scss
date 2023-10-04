@@ -1,0 +1,28 @@
+.connection {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+
+  .container {
+    background-color: #ff0101;
+    width: fit-content;
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: larger;
+    margin-bottom: 20px;
+  }
+
+  .link {
+    margin: 15px;
+    color: white;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
